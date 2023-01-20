@@ -6,51 +6,32 @@ public class Employee : EmployeeBase
     
     private List<double> grades = new List<double>();
 
-    public Employee(string name, DateTime date) : base(name, date)
-    {
-    }
-    
     public Employee(string name) : base(name)
     {
     }
 
-    public override DateTime SetDateOfBirth()
-    {
-        DateTime birthDay;
-        Console.WriteLine("Enter date of birth as day/month/year");
-
-        string[] formats = { "dd/MM/yyyy", "dd/M/yyyy", "d/M/yyyy", "d/MM/yyyy",
-                    "dd/MM/yy", "dd/M/yy", "d/M/yy", "d/MM/yy"};
-
-        while (!DateTime.TryParseExact(Console.ReadLine(), formats,
-            System.Globalization.CultureInfo.InvariantCulture,
-            System.Globalization.DateTimeStyles.None,
-            out birthDay))
-        {
-            Console.WriteLine("Your input is incorrect. Please input again.");
-        }
-        return birthDay;
-    }
-
     public override void AddGrade(string input)
     {
-        var grade = input switch
+        var grade = input.ToUpper() switch
         {
-            "1" or "F" or "f" => 1,
-            "-2" or "2-" or "-E" or "E-" or "-e" or "e-" => 1.75,
-            "2" or "E" or "e" => 2,
-            "+2" or "2+" or "+E" or "E+" or "+e" or "e+" => 2.5,
-            "-3" or "3-" or "-D" or "D-" or "-d" or "d-" => 2.75,
-            "3" or "D" or "d" => 3,
-            "+3" or "3+" or "+D" or "D+" or "+d" or "d+" => 3.5,
-            "-4" or "4-" or "-C" or "C-" or "-c" or "c-" => 3.75,
-            "4" or "C" or "c" => 4,
-            "+4" or "4+" or "+C" or "C+" or "+c" or "c+" => 4.5,
-            "-5" or "5-" or "-B" or "B-" or "-b" or "b-" => 4.75,
-            "5" or "B" or "b" => 5,
-            "+5" or "5+" or "+B" or "B+" or "+b" or "b+" => 5.5,
-            "-6" or "6-" or "-A" or "A-" or "-a" or "a-" => 5.75,
-            "6" or "A" or "a" => 6,
+            "1" or "F" => 1,
+            "2" or "E" => 2,
+            "3" or "D" => 3,
+            "4" or "C" => 4,
+            "5" or "B" => 5,
+            "6" or "A" => 6,
+
+            "2-" or "E-" => 1.75,
+            "3-" or "D-" => 2.75,
+            "4-" or "C-" => 3.75,
+            "5-" or "B-" => 4.75,
+            "6-" or "A-" => 5.75,
+
+            "1+" or "F+" => 2.5,
+            "2+" or "E+" => 2.5,
+            "3+" or "D+" => 3.5,
+            "4+" or "C+" => 4.5,
+            "5+" or "B+" => 5.5,
 
             _ => throw new ArgumentException($"Ivalid {nameof(input)}."),
         };

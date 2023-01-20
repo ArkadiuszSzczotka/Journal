@@ -5,8 +5,8 @@ public class TypeTests
     [Fact]
     public void GetEmployeeReturnsDifferentObjects()
     {
-        var emp1 = GetEmployee("Arek", DateTime.Today);
-        var emp2 = GetEmployee("Edie", DateTime.Today);
+        var emp1 = GetEmployee("Arek");
+        var emp2 = GetEmployee("Edie");
 
         Assert.NotSame(emp1, emp2);
         Assert.False(Object.ReferenceEquals(emp1, emp2));
@@ -15,7 +15,7 @@ public class TypeTests
     [Fact]
     public void TwoVariableCanReferenceSameObject()
     {
-        var emp1 = GetEmployee("Adam", DateTime.Today);
+        var emp1 = GetEmployee("Adam");
         var emp2 = emp1;
 
         Assert.Same(emp1, emp2);
@@ -30,9 +30,9 @@ public class TypeTests
         Assert.NotEqual(1, x);
     }
 
-    private Employee GetEmployee(string name, DateTime date)
+    private Employee GetEmployee(string name)
     {
-        return new Employee(name, date);
+        return new Employee(name);
     }
 
     private void ChangeX(out int v)

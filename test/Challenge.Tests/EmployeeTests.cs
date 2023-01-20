@@ -5,7 +5,7 @@ public class EmployeeTests
     [Fact]
     public void StatisticsGoodResult()
     {
-        var emp = new Employee("Arek", new DateTime(12,12,1900));
+        var emp = new Employee("Arek");
         emp.AddGrade(2);
         emp.AddGrade(4);
         emp.AddGrade(6);

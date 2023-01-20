@@ -1,28 +1,16 @@
 ﻿Console.WriteLine("Please input name");
 var name = Console.ReadLine();
 
-if (string.IsNullOrEmpty(name))
-{
-    throw new ArgumentNullException(nameof(name), "Please insert something");
-}
-
 var employee = new Employee(name);
-
-employee.DateOfBirth = employee.SetDateOfBirth();
 
 employee.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
 
 while (true)
 {
-
-    Console.WriteLine($"Enter grade(s) for {employee.Name} born {employee.DateOfBirth} or press q for quit.");
+    Console.WriteLine($"Enter grade(s) for {employee.Name} or press q for quit. Or empty and hit enter to close program.");
     var input = Console.ReadLine();
 
-    if(string.IsNullOrEmpty(input))
-    {
-        throw new ArgumentNullException(nameof(input), "Please insert something");
-    }
-    else if (input == "q" || input == "Q")
+    if(string.IsNullOrEmpty(input) || input == "q" || input == "Q")
     {
         break;
     }

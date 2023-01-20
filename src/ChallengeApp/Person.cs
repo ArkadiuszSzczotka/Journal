@@ -8,7 +8,7 @@ public abstract class Person
         {
             if (String.IsNullOrWhiteSpace(value))
             {
-                throw new ArgumentException($"Invalid argument {nameof(name)}");
+                Console.WriteLine("Name can not be empty");
             }
 
             foreach (char c in value)
@@ -27,27 +27,4 @@ public abstract class Person
     {
         this.Name = name;
     }
-
-    public Person(string name, DateTime date) : this(name)
-    {
-        this.dateOfBirth = date;
-    }
-
-    private DateTime dateOfBirth;
-    public DateTime DateOfBirth
-    {
-        get { return dateOfBirth; }
-        set
-        {
-            if (value > DateTime.Now)
-            {
-                throw new ArgumentException("Inavlid date of birth");
-            }
-            else
-            {
-                dateOfBirth = value;
-            }
-        }
-    }
-    public abstract DateTime SetDateOfBirth();
 }
