@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Text;
 
-public class EmployeeInFile : EmployeeBase
+public sealed class EmployeeInFile : EmployeeBase
 {    
     private const string fileName = "grades.txt";
 
@@ -66,8 +66,6 @@ public class EmployeeInFile : EmployeeBase
                 }
             }
         }
-
-        result.RiseIs();
 
         return result;
     }

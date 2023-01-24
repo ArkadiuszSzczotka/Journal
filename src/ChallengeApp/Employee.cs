@@ -1,4 +1,4 @@
-public class Employee : EmployeeBase
+public sealed class Employee : EmployeeBase
 {
     public override event GradeLowerThanThreeAdded GradeAddedLowerThanThree;
     
@@ -91,8 +91,6 @@ public class Employee : EmployeeBase
         {
             result.Add(grade);
         }
-
-        result.RiseIs();
 
         return result;
     }

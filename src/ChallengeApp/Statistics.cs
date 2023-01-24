@@ -1,17 +1,15 @@
 public class Statistics
 {
-    public double Sum;
+    private double Sum;
     public double High;
     public double Low;
     public int Counter;
-    public int Rise;
 
     public Statistics()
     {
         Sum = 0;
         High = double.MinValue;
         Low = double.MaxValue;
-        Rise = 0;
         Counter = 0;
     }
 
@@ -31,34 +29,31 @@ public class Statistics
         High = Math.Max(number, High);
     }
 
-    public void RiseIs()
+    public int Rise
     {
-        switch (Average)
-        {
-            case var d when d >= 5.75:
-                Rise = 1000;
-                break;
+        get
+        { 
+            switch (Average)
+            {
+                case var d when d >= 5.75:
+                    return 1000;
 
-            case var d when d >= 4.75:
-                Rise = 800;
-                break;
+                case var d when d >= 4.75:
+                    return 800;
 
-            case var d when d >= 3.75:
-                Rise = 600;
-                break;
+                case var d when d >= 3.75:
+                    return 600;
 
-            case var d when d >= 2.75:
-                Rise = 100;
-                break;
+                case var d when d >= 2.75:
+                    return 100;
 
-            case var d when d >= 1.75:
-                Rise = 50;
-                break;
+                case var d when d >= 1.75:
+                    return 50;
 
-            default:
-                Rise = 0;
-                break;
+                default:
+                    return 0;
 
+            }
         }
     }
 }

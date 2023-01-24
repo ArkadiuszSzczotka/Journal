@@ -15,7 +15,7 @@ public abstract class Person
             {
                 if (char.IsDigit(c))
                 {
-                    throw new ArgumentException($"Invalid argument {nameof(name)}");
+                    Console.WriteLine("There is digit in name!");
                 }
             }
 
