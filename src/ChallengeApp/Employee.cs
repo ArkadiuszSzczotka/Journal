@@ -1,5 +1,3 @@
-public delegate void GradeLowerThanThreeAdded(object sender, EventArgs args);
-
 public class Employee : EmployeeBase
 {
     public override event GradeLowerThanThreeAdded GradeAddedLowerThanThree;
@@ -27,7 +25,7 @@ public class Employee : EmployeeBase
             "5-" or "B-" => 4.75,
             "6-" or "A-" => 5.75,
 
-            "1+" or "F+" => 2.5,
+            "1+" or "F+" => 1.5,
             "2+" or "E+" => 2.5,
             "3+" or "D+" => 3.5,
             "4+" or "C+" => 4.5,
@@ -65,67 +63,36 @@ public class Employee : EmployeeBase
         }
     }
 
-    public void PrintStatistics()
-    {
-        var result = 0.0;
-        var minGrade = double.MaxValue;
-        var maxGrade = double.MinValue;
-
-        foreach (var n in grades)
+    public override void PrintStatistics()
+    {   
+        var stats = GetStatistics();
+        if(stats.Counter != 0)
         {
-            maxGrade = Math.Max(n, maxGrade);
-            minGrade = Math.Min(n, minGrade);
-            result += n;
+            Console.WriteLine($"""
+                {Name}'s statistics are:
+                {stats.Counter} is a number of grades,
+                {stats.High} is the highest grade,
+                {stats.Low} is the lowest grade,
+                {stats.Average:N2} is a average, 
+                {stats.Rise} is a possible rise.
+                """);                            
         }
-        result /= grades.Count;
-
-        System.Console.WriteLine($"Average: {result:N2}");
-        System.Console.WriteLine($"Low: {minGrade}");
-        System.Console.WriteLine($"High: {maxGrade}");
+        else
+        {
+            Console.WriteLine($"Could not get statistics for {Name} because there no grade has been added.");
+        }
     }
 
     public override Statistics GetStatistics()
     {
         var result = new Statistics();
-        result.Average = 0.0;
-        result.Low = double.MaxValue;
-        result.High = double.MinValue;
 
         foreach (var grade in grades)
         {
-            result.High = Math.Max(grade, result.High);
-            result.Low = Math.Min(grade, result.Low);
-            result.Average += grade;
+            result.Add(grade);
         }
-        result.Average /= grades.Count;
 
-        switch(result.Average)
-        {
-            case var d when d >= 5.75:
-                result.Letter = 'A';
-                break;
-            
-            case var d when d >= 4.75:
-                result.Letter = 'B';
-                break;
-
-            case var d when d >= 3.75:
-                result.Letter = 'C';
-                break;
-
-            case var d when d >= 2.75:
-                result.Letter = 'D';
-                break;
-
-            case var d when d >= 1.75:
-                result.Letter = 'E';
-                break;
-
-            default:
-                result.Letter = 'F';
-                break;
-
-        }
+        result.RiseIs();
 
         return result;
     }

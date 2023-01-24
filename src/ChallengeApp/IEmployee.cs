@@ -4,6 +4,8 @@ public interface IEmployee
 
     Statistics GetStatistics();
 
+    void PrintStatistics();
+
     string Name { get; }
 
     event GradeLowerThanThreeAdded GradeAddedLowerThanThree;

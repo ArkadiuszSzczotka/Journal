@@ -1,50 +1,103 @@
-﻿Console.WriteLine("Please input name");
-var name = Console.ReadLine();
+﻿Console.WriteLine("Welcome to your Journal");
 
-var employee = new Employee(name);
+bool isRunning = true;
 
-employee.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
-
-while (true)
+while(isRunning)
 {
-    Console.WriteLine($"Enter grade(s) for {employee.Name} or press q for quit. Or empty and hit enter to close program.");
-    var input = Console.ReadLine();
+    Console.WriteLine("Please choose that if your Journal should save grades for employee or student to text file nor should. Enter q for quit (Y/N/q).");
 
-    if(string.IsNullOrEmpty(input) || input == "q" || input == "Q")
+    var input = Console.ReadLine().ToLower();
+
+    switch (input)
     {
-        break;
+        case "y":
+            AddGradeToFile();
+            break;
+        case "n":
+            AddGradeToMemory();
+            break;
+        case "q":
+            isRunning = false;
+            break;
+        default:
+            Console.WriteLine("Input is invalid");
+            continue;
     }
+}
 
-    try
+static void AddGradeToFile()
+{
+    Console.WriteLine("Please type in employee's name.");
+
+    var employee = Console.ReadLine();
+
+    if (!String.IsNullOrEmpty(employee))
     {
-        employee.AddGrade(input);
+        var employeeInFile = new EmployeeInFile (employee);
+        employeeInFile.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
+        InsertGrade(employeeInFile);
+        employeeInFile.PrintStatistics();
     }
-
-    catch(FormatException ex)
+    else
     {
-        Console.WriteLine(ex.Message);
+        Console.WriteLine("Employee's name can not be empty.");
     }
+}
 
-    catch(ArgumentException ex)
+static void AddGradeToMemory()
+{
+    Console.WriteLine("Please type in employee's name.");
+
+    var employee = Console.ReadLine();
+
+    if (!String.IsNullOrEmpty(employee))
     {
-        Console.WriteLine(ex.Message);
+        var employeeInMemory = new Employee(employee);
+        employeeInMemory.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
+        InsertGrade(employeeInMemory);
+        employeeInMemory.PrintStatistics();
     }
+    else
+    {
+        Console.WriteLine("Employee's name can not be empty.");
+    }
+}
 
-    var stats = employee.GetStatistics();
+static void InsertGrade(IEmployee employee)
+{
+    while (true)
+    {
+        Console.WriteLine($"Enter grade for {employee.Name}:");
+        var input = Console.ReadLine().ToLower();
 
-    Console.WriteLine($"Average: {stats.Average:N2}");
-    Console.WriteLine($"Low: {stats.Low}");
-    Console.WriteLine($"High: {stats.High}");
-    Console.WriteLine($"Letter: {stats.Letter}");
+        if (input == "q" || input == "Q")
+        {
+            break;
+        }
+        try
+        {
+            employee.AddGrade(input);
+        }
+        catch (FormatException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch (NullReferenceException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Insert q for quit.");
+        }
+    }
 }
 
 static void OnGradeLowerThanThreeAdded(object sender, EventArgs args)
 {
     Console.WriteLine($"We must inform that your employee may not get a rise.");
 }
-
-
-
-
-
-
