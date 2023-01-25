@@ -89,14 +89,14 @@ public sealed class EmployeeInFile : EmployeeBase
             Console.WriteLine($"Could not get statistics for {Name} because there no grade has been added.");
         }
 
-        StringBuilder message = new StringBuilder($"{Name}'s grades:");
+        StringBuilder message = new StringBuilder($"{Name}'s grades:\n");
 
         using (var reader = File.OpenText(($"{fileName}")))
         {
             var line = reader.ReadLine();
             while (line != null)
             {
-                message.Append($"{line}; ");
+                message.Append($"{line}\n ");
                 line = reader.ReadLine();
             }
         }

@@ -74,8 +74,14 @@ public sealed class Employee : EmployeeBase
                 {stats.High} is the highest grade,
                 {stats.Low} is the lowest grade,
                 {stats.Average:N2} is a average, 
-                {stats.Rise} is a possible rise.
-                """);                            
+                {stats.Rise} is a possible rise,
+                {Name}'s grades:
+                """);
+
+            foreach ( var grade in grades )
+            {
+                Console.WriteLine(grade);
+            }
         }
         else
         {
