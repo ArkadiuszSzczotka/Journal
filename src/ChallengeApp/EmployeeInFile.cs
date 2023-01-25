@@ -2,10 +2,10 @@
 using System.Text;
 
 public sealed class EmployeeInFile : EmployeeBase
-{    
+{
     private const string fileName = "grades.txt";
 
-    public EmployeeInFile (string name) : base (name)
+    public EmployeeInFile(string name) : base(name)
     { }
 
     public override event GradeLowerThanThreeAdded GradeAddedLowerThanThree;

@@ -2,7 +2,7 @@
 
 bool isRunning = true;
 
-while(isRunning)
+while (isRunning)
 {
     Console.WriteLine("Please choose that if your Journal should save grades for employee or student to text file nor should. Enter q for quit (Y/N/q).");
 
@@ -33,7 +33,7 @@ static void AddGradeToFile()
 
     if (!String.IsNullOrEmpty(employee))
     {
-        var employeeInFile = new EmployeeInFile (employee);
+        var employeeInFile = new EmployeeInFile(employee);
         employeeInFile.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
         InsertGrade(employeeInFile);
         employeeInFile.PrintStatistics();

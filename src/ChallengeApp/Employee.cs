@@ -1,7 +1,7 @@
 public sealed class Employee : EmployeeBase
 {
     public override event GradeLowerThanThreeAdded GradeAddedLowerThanThree;
-    
+
     private List<double> grades = new List<double>();
 
     public Employee(string name) : base(name)
@@ -64,9 +64,9 @@ public sealed class Employee : EmployeeBase
     }
 
     public override void PrintStatistics()
-    {   
+    {
         var stats = GetStatistics();
-        if(stats.Counter != 0)
+        if (stats.Counter != 0)
         {
             Console.WriteLine($"""
                 {Name}'s statistics are:
@@ -78,7 +78,7 @@ public sealed class Employee : EmployeeBase
                 {Name}'s grades:
                 """);
 
-            foreach ( var grade in grades )
+            foreach (var grade in grades)
             {
                 Console.WriteLine(grade);
             }
