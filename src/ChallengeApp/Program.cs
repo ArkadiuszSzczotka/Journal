@@ -68,7 +68,7 @@ static void InsertGrade(IEmployee employee)
     while (true)
     {
         Console.WriteLine($"Enter grade for {employee.Name}:");
-        var input = Console.ReadLine().ToLower();
+        var input = Console.ReadLine();
 
         if (input == "q" || input == "Q")
         {
