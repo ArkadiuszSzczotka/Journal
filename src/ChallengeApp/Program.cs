@@ -31,7 +31,7 @@ static void AddGradeToFile()
 
     var employee = Console.ReadLine();
 
-    if (!String.IsNullOrEmpty(employee))
+    if (!String.IsNullOrEmpty(employee) && !String.IsNullOrWhiteSpace(employee) && !IsDigitInName(employee))
     {
         var employeeInFile = new EmployeeInFile(employee);
         employeeInFile.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
@@ -40,7 +40,7 @@ static void AddGradeToFile()
     }
     else
     {
-        Console.WriteLine("Employee's name can not be empty.");
+        Console.WriteLine("Employee's name can not be empty or contain digit.");
     }
 }
 
@@ -50,16 +50,16 @@ static void AddGradeToMemory()
 
     var employee = Console.ReadLine();
 
-    if (!String.IsNullOrEmpty(employee))
+    if (!String.IsNullOrEmpty(employee) && !String.IsNullOrWhiteSpace(employee) && !IsDigitInName(employee))
     {
-        var employeeInMemory = new Employee(employee);
+        var employeeInMemory = new EmployeeInMemory(employee);
         employeeInMemory.GradeAddedLowerThanThree += OnGradeLowerThanThreeAdded;
         InsertGrade(employeeInMemory);
         employeeInMemory.PrintStatistics();
     }
     else
     {
-        Console.WriteLine("Employee's name can not be empty.");
+        Console.WriteLine("Employee's name can not be empty or contain digit.");
     }
 }
 
@@ -100,4 +100,16 @@ static void InsertGrade(IEmployee employee)
 static void OnGradeLowerThanThreeAdded(object sender, EventArgs args)
 {
     Console.WriteLine($"We must inform that your employee may not get a rise.");
+}
+
+static bool IsDigitInName(string input)
+{
+    foreach (char c in input)
+    {
+        if (char.IsDigit(c))
+        {
+            return true;
+        }
+    }
+    return false;
 }

@@ -35,19 +35,19 @@ public class Statistics
         { 
             switch (Average)
             {
-                case var d when d >= 5.75:
+                case >= 5.75:
                     return 1000;
 
-                case var d when d >= 4.75:
+                case >= 4.75:
                     return 800;
 
-                case var d when d >= 3.75:
+                case >= 3.75:
                     return 600;
 
-                case var d when d >= 2.75:
+                case >= 2.75:
                     return 100;
 
-                case var d when d >= 1.75:
+                case >= 1.75:
                     return 50;
 
                 default:

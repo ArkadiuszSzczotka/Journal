@@ -5,7 +5,7 @@ public class EmployeeTests
     [Fact]
     public void StatisticsGoodResult()
     {
-        var emp = new Employee("Arek");
+        var emp = new EmployeeInMemory("Arek");
         emp.AddGrade(2);
         emp.AddGrade(4);
         emp.AddGrade(6);
@@ -20,7 +20,7 @@ public class EmployeeTests
     [Fact]
     public void IsLastGradeRemoved()
     {
-        var emp1 = new Employee("Zuzia");
+        var emp1 = new EmployeeInMemory("Zuzia");
         emp1.AddGrade(6);
         emp1.AddGrade(5.5);
         int listSizeBefore = emp1.GetListSize();

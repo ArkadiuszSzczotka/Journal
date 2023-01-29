@@ -30,9 +30,9 @@ public class TypeTests
         Assert.NotEqual(1, x);
     }
 
-    private Employee GetEmployee(string name)
+    private EmployeeInMemory GetEmployee(string name)
     {
-        return new Employee(name);
+        return new EmployeeInMemory(name);
     }
 
     private void ChangeX(out int v)

@@ -1,38 +1,17 @@
-public sealed class Employee : EmployeeBase
+public sealed class EmployeeInMemory : EmployeeBase
 {
     public override event GradeLowerThanThreeAdded GradeAddedLowerThanThree;
 
     private List<double> grades = new List<double>();
 
-    public Employee(string name) : base(name)
+    public EmployeeInMemory(string name) : base(name)
     {
     }
 
     public override void AddGrade(string input)
-    {
-        var grade = input.ToUpper() switch
-        {
-            "1" or "F" => 1,
-            "2" or "E" => 2,
-            "3" or "D" => 3,
-            "4" or "C" => 4,
-            "5" or "B" => 5,
-            "6" or "A" => 6,
+    {       
+        var grade = ReturnGrade(input);
 
-            "2-" or "E-" => 1.75,
-            "3-" or "D-" => 2.75,
-            "4-" or "C-" => 3.75,
-            "5-" or "B-" => 4.75,
-            "6-" or "A-" => 5.75,
-
-            "1+" or "F+" => 1.5,
-            "2+" or "E+" => 2.5,
-            "3+" or "D+" => 3.5,
-            "4+" or "C+" => 4.5,
-            "5+" or "B+" => 5.5,
-
-            _ => throw new ArgumentException($"Ivalid {nameof(input)}."),
-        };
         this.grades.Add(grade);
 
         if (grade < 3 && GradeAddedLowerThanThree is not null)
